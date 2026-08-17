@@ -47,16 +47,24 @@ setup();
 // Re-run after View Transitions navigation.
 document.addEventListener("astro:after-swap", setup);
 
-// Carry the theme-color value across View Transitions to prevent the
-// Android navigation bar from flashing during page transitions.
+// Carry theme state across View Transitions before Astro swaps in the new
+// document. Without this, the incoming document can briefly render with its
+// default root theme during client-side navigation.
 document.addEventListener("astro:before-swap", event => {
+  const newDocument = (event as { newDocument: Document }).newDocument;
+  const newRoot = newDocument.documentElement;
+
+  newRoot.setAttribute("data-theme", themeValue);
+  newRoot.classList.toggle("dark", themeValue === DARK);
+
   const color = document
     .querySelector("meta[name='theme-color']")
     ?.getAttribute("content");
   if (color) {
-    (event as { newDocument: Document }).newDocument
-      .querySelector("meta[name='theme-color']")
-      ?.setAttribute("content", color);
+    newDocument.querySelector("meta[name='theme-color']")?.setAttribute(
+      "content",
+      color
+    );
   }
 });
 

@@ -6,6 +6,19 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @layer base {
+  html {
+    @apply bg-background text-foreground;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 28rem),
+      linear-gradient(color-mix(in srgb, var(--border) 28%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--border) 22%, transparent) 1px, transparent 1px);
+    background-size: auto, 42px 42px, 42px 42px;
+  }
+
   * {
     @apply border-border outline-accent/75;
     scrollbar-width: auto;
@@ -22,15 +35,43 @@
 }
 
 @utility max-w-app {
-  @apply max-w-3xl;
+  @apply max-w-4xl;
 }
 
 @utility app-layout {
   @apply max-w-app mx-auto w-full px-4;
 }
 
+@utility pane {
+  @apply border-border bg-card/85 rounded-lg border shadow-lg shadow-black/5 backdrop-blur-sm;
+}
+
+@utility pane-pad {
+  @apply p-4 sm:p-5;
+}
+
+@utility tag-pill {
+  @apply border-border bg-surface/70 text-foreground rounded-full border px-2 py-0.5 text-xs font-medium;
+}
+
+@utility section-title {
+  @apply text-2xl font-semibold tracking-wide;
+}
+
+@utility tmux-status {
+  @apply border-border bg-card/95 rounded-lg border shadow-lg shadow-black/10 backdrop-blur-sm;
+}
+
+@utility tmux-label {
+  @apply bg-accent text-accent-foreground rounded px-2 py-1 text-sm font-semibold;
+}
+
+@utility tmux-segment {
+  @apply text-muted-foreground hover:bg-surface hover:text-foreground rounded px-2 py-1 text-sm font-medium no-underline transition-colors;
+}
+
 @utility active-nav {
-  @apply underline decoration-wavy decoration-2 underline-offset-8;
+  @apply bg-accent text-accent-foreground no-underline;
 }
 
 :target {

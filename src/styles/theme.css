@@ -4,31 +4,43 @@
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-card: var(--card);
+  --color-surface: var(--surface);
+  --color-overlay: var(--overlay);
+  --color-success: var(--success);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --font-app: var(--font-google-sans-code);
 }
 
-/* Light theme values */
+/* Gruvbox Material Light */
 :root,
 [data-theme="light"] {
-  --background: #fdfdfd;
-  --foreground: #282728;
-  --accent: #006cac;
-  --accent-foreground: #ffffff;
-  --muted: #e6e6e6;
-  --muted-foreground: #6b7280;
-  --border: #ece9e9;
+  --background: #f2e5bc;
+  --foreground: #4f3829;
+  --accent: #b57614;
+  --accent-foreground: #fbf1c7;
+  --card: #ebdbb2;
+  --surface: #d5c4a1;
+  --overlay: #a89984;
+  --success: #6c782e;
+  --muted: #e0cfa9;
+  --muted-foreground: #7c6f64;
+  --border: #c9b99a;
 }
 
-/* Dark theme values */
+/* Gruvbox Material Dark */
 [data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
-  --accent-foreground: #ffffff;
-  --muted: #343f60;
-  --muted-foreground: #afb9ca;
-  --border: #ab4b08;
+  --background: #1d2021;
+  --foreground: #ddc7a1;
+  --accent: #d8a657;
+  --accent-foreground: #1d2021;
+  --card: #282828;
+  --surface: #32302f;
+  --overlay: #7c6f64;
+  --success: #a9b665;
+  --muted: #32302f;
+  --muted-foreground: #a89984;
+  --border: #504945;
 }
