@@ -8,6 +8,7 @@ import Footer from "@/components/Footer.astro";
 import Socials from "@/components/Socials.astro";
 import Card from "@/components/Card.astro";
 import LinkButton from "@/components/LinkButton.astro";
+import ProjectMedia from "@/components/ProjectMedia.astro";
 import SkillChip from "@/components/SkillChip.astro";
 import { softwareExperience } from "@/data/experience";
 import { selectedWork } from "@/data/projects";
@@ -140,36 +141,53 @@ const experienceSnapshot = softwareExperience.slice(0, 2);
             <li class="pane pane-pad">
               <h3 class="text-xl font-semibold">{work.title}</h3>
 
-              <p class="mt-2">{work.description}</p>
+              <div
+                class:list={[
+                  "mt-3 grid gap-4",
+                  work.media && "md:grid-cols-[minmax(14rem,18rem)_1fr]",
+                ]}
+              >
+                <ProjectMedia media={work.media} />
 
-              {(work.href || work.reportHref) && (
-                <p class="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-                  {work.href && (
-                    <a
-                      href={work.href}
-                      target="_blank"
-                      class="hover:text-accent underline decoration-dashed underline-offset-4"
-                    >
-                      View project
-                    </a>
+                <div>
+                  <p>{work.description}</p>
+
+                  {(work.href || work.reportHref) && (
+                    <p class="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                      {work.href && (
+                        <a
+                          href={work.href}
+                          target="_blank"
+                          class="hover:text-accent underline decoration-dashed underline-offset-4"
+                        >
+                          View project
+                        </a>
+                      )}
+
+                      {work.reportHref && (
+                        <a
+                          href={work.reportHref}
+                          target="_blank"
+                          class="hover:text-accent underline decoration-dashed underline-offset-4"
+                        >
+                          View report
+                        </a>
+                      )}
+                    </p>
                   )}
 
-                  {work.reportHref && (
-                    <a
-                      href={work.reportHref}
-                      target="_blank"
-                      class="hover:text-accent underline decoration-dashed underline-offset-4"
-                    >
-                      View report
-                    </a>
-                  )}
-                </p>
-              )}
+                  <ul class="mt-3 list-disc space-y-1 ps-5">
+                    {work.highlights.map(highlight => (
+                      <li>{highlight}</li>
+                    ))}
+                  </ul>
 
-              <div class="mt-2 flex flex-wrap gap-2">
-                {work.tags.map(tag => (
-                  <SkillChip label={tag} />
-                ))}
+                  <div class="mt-2 flex flex-wrap gap-2">
+                    {work.tags.map(tag => (
+                      <SkillChip label={tag} />
+                    ))}
+                  </div>
+                </div>
               </div>
             </li>
           ))

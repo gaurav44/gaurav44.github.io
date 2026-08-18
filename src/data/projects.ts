@@ -1,3 +1,9 @@
+export type ProjectMediaItem = {
+  src: string;
+  alt: string;
+  caption?: string;
+};
+
 export type Project = {
   title: string;
   period?: string;
@@ -5,6 +11,7 @@ export type Project = {
   description: string;
   highlights: string[];
   tags: string[];
+  media?: ProjectMediaItem | ProjectMediaItem[];
   href?: string;
   reportHref?: string;
   selected?: boolean;
@@ -23,6 +30,11 @@ export const projects: Project[] = [
       "Added unit testing with GoogleTest and CI/CD on a self-hosted runner using GitHub Actions",
     ],
     tags: ["C++", "CUDA", "GoogleTest", "GitHub Actions"],
+    media: {
+      src: "/projects/rayleigh-benard/rayleigh-benard.gif",
+      alt: "Rayleigh-Bénard convection simulation animation",
+      caption: "Rayleigh-Bénard convection field evolution",
+    },
     href: "https://github.com/gaurav44/Rayleigh_Benard_Convection_CUDA",
     selected: true,
   },
@@ -35,9 +47,21 @@ export const projects: Project[] = [
     highlights: [
       "Ported an adaptive mesh refinement CFD code to a hardware-agnostic framework using Kokkos",
       "Benchmarked single-phase simulations on NVIDIA GPUs and OpenMP CPUs",
-      "Achieved up to 3x speedup on selected cases on an NVIDIA A1000 GPU versus a 16-core CPU",
+      "Measured up to ~3.5x CPU/GPU speedup in 3D cell-count benchmarks",
     ],
     tags: ["C++", "Kokkos", "CUDA", "OpenMP"],
+    media: [
+      {
+        src: "/projects/kokkos-cfd/rti-amr.png",
+        alt: "Adaptive mesh CFD density field from the Kokkos CFD port",
+        caption: "Adaptive-mesh CFD field from the Kokkos-port solver",
+      },
+      {
+        src: "/projects/kokkos-cfd/3d-cell-speedup.png",
+        alt: "3D cell-count benchmark showing CPU versus GPU speedup",
+        caption: "3D benchmark: up to ~3.5x CPU/GPU speedup",
+      },
+    ],
     href: "https://gitlab.lrz.de/nanoshock/ALPACA",
     reportHref: "/reports/MSc.ThesisGauravGokhale.pdf",
     selected: true,
@@ -58,14 +82,19 @@ export const projects: Project[] = [
     period: "May 2022 – July 2022",
     category: "software",
     description:
-      "Developed an object-oriented 2D CFD solver in C++ for incompressible Navier-Stokes equations.",
+      "Object-oriented C++ CFD solver for incompressible Navier-Stokes equations, with MPI parallelization, VTK output, and MAC free-surface simulations.",
     highlights: [
-      "Developed an object-oriented 2D CFD solver in C++ to solve incompressible Navier-Stokes equations using finite differences",
+      "Implemented finite-difference discretization for 2D incompressible flow",
       "Parallelized the solver for distributed-memory systems using MPI",
-      "Simulated and validated standard cases including 2D channel flow, lid-driven cavity, and Rayleigh-Bénard convection",
-      "Extended the solver to support free-surface flows using the Marker-and-Cell method, including dam-break and tank-sloshing cases",
+      "Validated channel flow, lid-driven cavity, and Rayleigh-Bénard cases",
+      "Generated VTK/ParaView outputs for dam-break, droplet, and baffled-tank free-surface cases",
     ],
     tags: ["C++", "CFD", "MPI", "Numerical Methods"],
+    media: {
+      src: "/projects/cfd-lab/dam-break-with-obstacle.gif",
+      alt: "Dam-break free-surface CFD simulation with an obstacle",
+      caption: "Dam-break free-surface output from the MAC solver",
+    },
     href: "https://github.com/gaurav44/CFD-lab/tree/MAC",
     // reportHref: "/reports/cfd-lab.pdf",
   },
@@ -74,13 +103,25 @@ export const projects: Project[] = [
     period: "Nov. 2022 – Feb. 2023",
     category: "software",
     description:
-      "Implemented and validated turbulence models for 3D flows, then evaluated scaling on an HPC system.",
+      "Implemented algebraic and k-epsilon turbulence models, validated channel-flow profiles, and parallelized the solver for HPC runs.",
     highlights: [
       "Implemented and validated algebraic and k-epsilon turbulence models for 3D flows",
       "Parallelized the implementation with MPI",
       "Conducted strong and weak scaling on the CoolMUC-2 supercomputer",
     ],
     tags: ["HPC", "MPI", "Turbulence", "CFD"],
+    media: [
+      {
+        src: "/projects/turbulent-hpc/turbulence-model-comparison.png",
+        alt: "Velocity magnitude comparison between DNS, algebraic turbulence model, and k-epsilon model",
+        caption: "DNS, algebraic, and k-epsilon velocity-profile comparison",
+      },
+      {
+        src: "/projects/turbulent-hpc/wall-law-validation.png",
+        alt: "Wall-law validation plot showing U-plus versus y-plus for turbulent channel flow",
+        caption: "Wall-law validation for turbulent channel-flow cases",
+      },
+    ],
     href: "https://github.com/gaurav44/Turbulence-Flow-on-HPC-Systems-Lab/tree/k_e",
     reportHref: "/reports/k_epsilion.pdf",
     selected: true,
@@ -97,6 +138,11 @@ export const projects: Project[] = [
       "Validated solver behavior with GoogleTest-based numerical tests",
     ],
     tags: ["C++", "Eigen", "GoogleTest", "Numerical Methods"],
+    media: {
+      src: "/projects/ode-solver/pendulum.gif",
+      alt: "Pendulum trajectory generated by the ODE solver",
+      caption: "Pendulum integration example from the ODE solver",
+    },
     href: "https://github.com/gaurav44/ODE_Solver/tree/sprint_3",
   },
   {
