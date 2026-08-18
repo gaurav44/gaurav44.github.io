@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry, render } from "astro:content";
+import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import Layout from "@/layouts/Layout.astro";
@@ -8,6 +8,7 @@ import Footer from "@/components/Footer.astro";
 import Socials from "@/components/Socials.astro";
 import Card from "@/components/Card.astro";
 import LinkButton from "@/components/LinkButton.astro";
+import { softwareExperience } from "@/data/experience";
 import { selectedWork } from "@/data/projects";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { useTranslations } from "@/i18n";
@@ -20,16 +21,16 @@ const t = useTranslations(locale);
 
 const posts = await getCollection("posts");
 const recentPosts = getSortedPosts(posts);
-const about = await getEntry("pages", "about");
 const homePath = getRelativeLocaleUrl(locale, "");
 
-if (!about) {
-  throw new Error(
-    "Missing content entry: `about.md` or `about.mdx` in `src/content/pages/`"
-  );
-}
+const focusAreas = [
+  "Modern C++",
+  "GPU computing",
+  "Performance portability",
+  "Scientific software",
+];
 
-const { Content: AboutContent } = await render(about);
+const experienceSnapshot = softwareExperience.slice(0, 2);
 ---
 
 <Layout>
@@ -41,26 +42,39 @@ const { Content: AboutContent } = await render(about);
     class="app-layout"
   >
     <section id="hero" class="border-border border-b pt-10 pb-8">
-      <h1 class="my-4 inline-block text-4xl font-bold tracking-tight sm:my-8 sm:text-5xl">
+      <p class="text-accent text-sm font-semibold tracking-wide uppercase">
+        C++ / HPC / Scientific Computing
+      </p>
+
+      <h1
+        class="my-4 max-w-3xl text-4xl font-bold tracking-tight sm:my-6 sm:text-5xl"
+      >
         Gaurav Gokhale
       </h1>
 
-      <div class="app-prose mt-2">
-        <AboutContent />
-      </div>
+      <p class="text-muted-foreground max-w-3xl text-lg leading-8">
+        I build performance-sensitive C++ software for simulation and scientific
+        computing, with hands-on work in GPU acceleration, parallel algorithms,
+        and production HPC codebases.
+      </p>
 
-      <p class="mt-4">
-        <a 
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a
           href="/GokhaleCV.pdf"
           target="_blank"
-          class="hover:text-accent underline decoration-dashed underline-offset-4"
-          >
-          View my CV
+          class="tmux-label no-underline"
+        >
+          View CV
         </a>
-      </p>
+      </div>
+
+      <div class="mt-6 flex flex-wrap gap-2">
+        {focusAreas.map(area => <span class="tag-pill">{area}</span>)}
+      </div>
+
       {
         socials.length > 0 && (
-          <div class="mt-4 flex max-sm:flex-col sm:items-center">
+          <div class="mt-6 flex max-sm:flex-col sm:items-center">
             <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">
               {t.home.socialLinks}:
             </div>
@@ -69,70 +83,103 @@ const { Content: AboutContent } = await render(about);
         )
       }
     </section>
-    
+
+    <section id="experience-snapshot" class="border-border border-b pt-12 pb-6">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h2 class="section-title">Experience</h2>
+          <p class="text-muted-foreground mt-2">
+            Recent work in scientific and GPU software.
+          </p>
+        </div>
+
+        <a
+          href={getRelativeLocaleUrl(locale, "experience")}
+          class="hover:text-accent underline decoration-dashed underline-offset-4"
+        >
+          View full timeline
+        </a>
+      </div>
+
+      <ol class="mt-6 grid gap-4 sm:grid-cols-2">
+        {
+          experienceSnapshot.map(experience => (
+            <li class="pane pane-pad">
+              <p class="text-muted-foreground text-sm font-medium">
+                {experience.period}
+              </p>
+              <h3 class="mt-1 text-xl font-semibold">{experience.company}</h3>
+              <p class="mt-1 font-medium">
+                {experience.role}
+                {experience.product && (
+                  <span class="text-muted-foreground">
+                    {" "}
+                    / {experience.product}
+                  </span>
+                )}
+              </p>
+              <p class="text-muted-foreground mt-3">{experience.summary}</p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                {experience.tags.slice(0, 4).map(tag => (
+                  <span class="tag-pill">#{tag}</span>
+                ))}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
     <section id="selected-work" class="border-border border-b pt-12 pb-6">
-      <h2 class="section-title">
-        Selected Work
-      </h2>
+      <h2 class="section-title">Selected Work</h2>
 
       <ul class="mt-6 grid gap-4">
         {
           selectedWork.map(work => (
             <li class="pane pane-pad">
-              <h3 class="text-xl font-semibold">
-                {work.title}
-              </h3>
+              <h3 class="text-xl font-semibold">{work.title}</h3>
 
-              <p class="mt-2">
-                {work.description}
-              </p>
+              <p class="mt-2">{work.description}</p>
 
-              {
-                (work.href || work.reportHref) && (
-                  <p class="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-                    {work.href && (
-                      <a
-                        href={work.href}
-                        target="_blank"
-                        class="hover:text-accent underline decoration-dashed underline-offset-4"
-                      >
-                        View project
-                      </a>
-                    )}
+              {(work.href || work.reportHref) && (
+                <p class="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                  {work.href && (
+                    <a
+                      href={work.href}
+                      target="_blank"
+                      class="hover:text-accent underline decoration-dashed underline-offset-4"
+                    >
+                      View project
+                    </a>
+                  )}
 
-                    {work.reportHref && (
-                      <a
-                        href={work.reportHref}
-                        target="_blank"
-                        class="hover:text-accent underline decoration-dashed underline-offset-4"
-                      >
-                        View report
-                      </a>
-                    )}
-                  </p>
-                )
-              }
+                  {work.reportHref && (
+                    <a
+                      href={work.reportHref}
+                      target="_blank"
+                      class="hover:text-accent underline decoration-dashed underline-offset-4"
+                    >
+                      View report
+                    </a>
+                  )}
+                </p>
+              )}
 
               <div class="mt-2 flex flex-wrap gap-2">
                 {work.tags.map(tag => (
-                  <span class="tag-pill">
-                    #{tag}
-                  </span>
+                  <span class="tag-pill">#{tag}</span>
                 ))}
               </div>
             </li>
           ))
         }
       </ul>
-
     </section>
 
     {
       recentPosts.length > 0 && (
         <section id="recent-posts" class="pt-12 pb-6">
-          <h2 class="section-title">
-            {t.home.recentPosts}
-          </h2>
+          <h2 class="section-title">{t.home.recentPosts}</h2>
           <ul>
             {recentPosts.slice(0, postsConfig.perIndex).map(data => (
               <Card variant="h3" {...data} />

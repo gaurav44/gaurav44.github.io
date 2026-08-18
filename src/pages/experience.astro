@@ -5,79 +5,8 @@ import Breadcrumb from "@/components/Breadcrumb.astro";
 import Main from "@/components/Main.astro";
 import Footer from "@/components/Footer.astro";
 import ExperienceList from "@/components/ExperienceList.astro";
+import { engineeringExperience, softwareExperience } from "@/data/experience";
 import config from "@/config";
-
-type Experience = {
-  company: string;
-  role: string;
-  period: string;
-  highlights: string[];
-  tags: string[];
-  referenceHref?: string;
-};
-
-const softwareExperience: Experience[] = [
-  {
-    company: "DCS Computing GmbH",
-    role: "HPC Software Developer, Aspherix Simulation Software",
-    period: "Jan. 2025 – July 2026",
-    highlights: [
-      "Improved GPU performance by porting particle-mesh force calculation to GPU and accelerating broad-phase neighbor-list generation by 20x",
-      "Extended backend and build support for CUDA, HIP, and OpenMP, including AMD GPU enablement through Kokkos/HIP",
-      "Debugged distributed-memory simulation issues including segmentation faults, invalid memory accesses, and MPI calculation errors using Python-GDB integration and tmpi",
-      "Refactored meshing code for convex decomposition of concave geometries, integrated CoACD, and added unit tests with GoogleTest",
-    ],
-    tags: ["C++", "CUDA", "HIP", "OpenMP", "MPI", "Kokkos"],
-    referenceHref: "/references/dcs.pdf",
-  },
-  {
-    company: "Altair Engineering GmbH",
-    role: "Working Student, nanoFluidX GPU Simulation Software Team",
-    period: "June 2022 – June 2024",
-    highlights: [
-      "Built C++ diagnostic tools for multi-GPU systems and Python-based automated test workflows",
-      "Implemented and maintained the Linux and Windows CMake build for a CUDA/C++ simulation codebase",
-      "Delivered multiphysics coupling between nanoFluidX and MotionSolve using Kratos/CoSimIO",
-    ],
-    tags: ["C++", "CUDA", "CMake", "Python", "Multi-GPU"],
-    referenceHref: "/references/altair.pdf",
-  },
-];
-
-const engineeringExperience: Experience[] = [
-  {
-    company: "3D Engineering Automation LLP",
-    role: "Intern",
-    period: "Sept. 2020 – May 2021",
-    highlights: [
-      "Performed grid-dependence studies for CFD simulations of mixing tanks",
-      "Set up CFD simulations in Ansys Fluent, calculated mixing time, and streamlined post-processing with macros",
-    ],
-    tags: ["CFD", "Ansys Fluent", "Post-processing"],
-    referenceHref: "/references/3dengg.pdf",
-  },
-  {
-    company: "Michelin India Technology Centre",
-    role: "R&D Engineer",
-    period: "Dec. 2019 – Sept. 2020",
-    highlights: [
-      "Performed performance tuning for wear, endurance, rolling resistance, grip, and noise using finite element analysis",
-    ],
-    tags: ["FEA", "Simulation", "R&D"],
-    referenceHref: "/references/michelin.pdf",
-  },
-  {
-    company: "Samson Controls Pvt. Ltd.",
-    role: "Project Intern",
-    period: "Aug. 2018 – March 2019",
-    highlights: [
-      "Worked on mitigating a productivity-related manufacturing problem",
-      "Designed and manufactured a working prototype of a drilling machine with a variable spindle-distance gearbox, adjustable from 35 mm to 70 mm",
-    ],
-    tags: ["Mechanical Design", "Manufacturing", "Prototyping"],
-    referenceHref: "/references/samson_controls.pdf",
-  },
-];
 ---
 
 <Layout
@@ -90,14 +19,19 @@ const engineeringExperience: Experience[] = [
 
   <Main
     pageTitle="Experience"
-    pageDesc="Software and scientific-computing experience first, with earlier broader engineering experience available below."
+    pageDesc="A visual timeline of software, HPC, and engineering simulation work."
+    class="max-w-6xl"
   >
     <section>
-      <h2 class="text-2xl font-semibold tracking-wide">
-        Software / Scientific Computing
-      </h2>
+      <h2 class="experience-section-title">Software / Scientific Computing</h2>
 
       <ExperienceList items={softwareExperience} />
+
+      <p
+        class="border-border bg-card/80 text-accent mt-6 rounded border px-4 py-3 font-semibold"
+      >
+        &gt; Building high-performance scientific software that scales.
+      </p>
     </section>
 
     <details class="pane pane-pad mt-8">
@@ -106,10 +40,11 @@ const engineeringExperience: Experience[] = [
       </summary>
 
       <p class="mt-2 opacity-80">
-        Broader mechanical and simulation-focused roles that predate the current software/HPC focus.
+        Mechanical and simulation-focused roles before the current software/HPC
+        focus.
       </p>
 
-      <ExperienceList items={engineeringExperience} />
+      <ExperienceList items={engineeringExperience} compact />
     </details>
   </Main>
 
