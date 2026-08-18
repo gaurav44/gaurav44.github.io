@@ -13,10 +13,24 @@
   body {
     @apply bg-background text-foreground;
     background-image:
-      radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 28rem),
-      linear-gradient(color-mix(in srgb, var(--border) 28%, transparent) 1px, transparent 1px),
-      linear-gradient(90deg, color-mix(in srgb, var(--border) 22%, transparent) 1px, transparent 1px);
-    background-size: auto, 42px 42px, 42px 42px;
+      radial-gradient(
+        circle at 20% 0%,
+        color-mix(in srgb, var(--accent) 16%, transparent),
+        transparent 28rem
+      ),
+      linear-gradient(
+        color-mix(in srgb, var(--border) 28%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--border) 22%, transparent) 1px,
+        transparent 1px
+      );
+    background-size:
+      auto,
+      42px 42px,
+      42px 42px;
   }
 
   * {
@@ -52,6 +66,34 @@
 
 @utility tag-pill {
   @apply border-border bg-surface/70 text-foreground rounded-full border px-2 py-0.5 text-xs font-medium;
+}
+
+@utility skill-chip {
+  @apply border-border bg-surface/70 text-foreground inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium;
+}
+
+@utility skill-chip-icon {
+  @apply text-accent grid size-4 shrink-0 place-items-center;
+}
+
+.skill-chip-icon svg {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  overflow: visible;
+}
+
+.skill-chip-icon svg path,
+.skill-chip-icon svg rect {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.skill-chip-icon .filled-logo path {
+  stroke: none;
 }
 
 @utility section-title {

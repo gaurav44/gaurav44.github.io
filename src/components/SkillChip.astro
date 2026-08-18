@@ -1,0 +1,80 @@
+---
+type Props = {
+  label: string;
+  class?: string;
+};
+
+const { label, class: className } = Astro.props;
+const key = label.toLowerCase();
+---
+
+<span class:list={["skill-chip", className]}>
+  <span class="skill-chip-icon" aria-hidden="true">
+    {
+      key.includes("cuda") ? (
+        <svg viewBox="0 0 24 24">
+          <path d="M2.5 12c3.2-5.2 7.2-7.8 12-7.8 2.9 0 5.2.9 7 2.8-2.6-.8-5.2-.5-7.8.8C9.9 9.8 7 12.6 5 16.2c1.8-1.1 3.8-1.6 6-1.5 2.8.1 5.4 1.3 7.8 3.5-2.1 1.1-4.4 1.5-6.8 1.1-3.7-.6-6.8-3-9.5-7.3Z" />
+        </svg>
+      ) : key.includes("hip") ? (
+        <svg viewBox="0 0 24 24">
+          <path d="M4 15h6V9h6l4-4v14H6z" />
+          <path d="M10 15 20 5M10 9v10" />
+        </svg>
+      ) : key.includes("openmp") ? (
+        <svg viewBox="0 0 24 24">
+          <path d="M4 6h14a3 3 0 0 1 0 6H8M4 18h14a3 3 0 0 0 0-6H8" />
+        </svg>
+      ) : key.includes("mpi") || key.includes("multi-gpu") ? (
+        <svg viewBox="0 0 24 24">
+          <path d="M4 5h7v6H4zM13 5h7v6h-7zM4 13h7v6H4zM13 13h7v6h-7z" />
+        </svg>
+      ) : key.includes("kokkos") ? (
+        <svg viewBox="0 0 24 24">
+          <path d="M12 3 20 8v8l-8 5-8-5V8z" />
+          <path d="M8 9.5 12 7l4 2.5v5L12 17l-4-2.5z" />
+        </svg>
+      ) : key.includes("cmake") ? (
+        <svg viewBox="0 0 24 24" class="filled-logo">
+          <path d="M12 3 4 20h16z" fill="#4f86d9" stroke="none" />
+          <path d="M12 3v17H4z" fill="#48a868" stroke="none" />
+          <path d="M12 3 20 20h-8z" fill="#c95047" stroke="none" />
+        </svg>
+      ) : key.includes("python") ? (
+        <svg viewBox="0 0 24 24" class="filled-logo">
+          <path
+            d="M6 11V6c0-2 1.2-3 3.2-3H15v4H9v2h9c2 0 3 1.2 3 3.2V14h-7v-3z"
+            fill="#3776ab"
+            stroke="none"
+          />
+          <path
+            d="M18 13v5c0 2-1.2 3-3.2 3H9v-4h6v-2H6c-2 0-3-1.2-3-3.2V10h7v3z"
+            fill="#ffd343"
+            stroke="none"
+          />
+        </svg>
+      ) : key.includes("c++") ? (
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2 21 7v10l-9 5-9-5V7z" />
+          <path d="M14.6 8.8a4 4 0 1 0 0 6.4M16.5 10v4M18.5 10v4M15.4 12h4.2" />
+        </svg>
+      ) : key.includes("test") ? (
+        <svg viewBox="0 0 24 24">
+          <path d="M8 3h8M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6A2 2 0 0 0 19 18l-5-9V3" />
+        </svg>
+      ) : key.includes("cfd") || key.includes("fluid") ? (
+        <svg viewBox="0 0 24 24">
+          <path d="M4 14c3-4 6-4 9 0s6 4 9 0M4 18c3-3 6-3 9 0s6 3 9 0" />
+        </svg>
+      ) : key.includes("hpc") || key.includes("parallel") ? (
+        <svg viewBox="0 0 24 24">
+          <path d="M5 6h5v5H5zM14 6h5v5h-5zM5 15h5v5H5zM14 15h5v5h-5z" />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 24 24">
+          <path d="M12 4v16M4 12h16" />
+        </svg>
+      )
+    }
+  </span>
+  {label}
+</span>

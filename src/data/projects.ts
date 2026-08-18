@@ -83,21 +83,21 @@ export const projects: Project[] = [
     tags: ["HPC", "MPI", "Turbulence", "CFD"],
     href: "https://github.com/gaurav44/Turbulence-Flow-on-HPC-Systems-Lab/tree/k_e",
     reportHref: "/reports/k_epsilion.pdf",
+    selected: true,
   },
   {
     title: "ODE Solver in C++",
     period: "Oct. 2021 – Jan. 2022",
     category: "software",
     description:
-      "Created an object-oriented ODE solver in C++ using Eigen and unit tests with GoogleTest.",
+      "Object-oriented C++ library for solving initial-value ODE problems with multiple time-integration schemes.",
     highlights: [
-      "Created an ODE solver in C++ using object-oriented design and the Eigen linear algebra library",
-      "Implemented Explicit Euler, second- and fourth-order Runge-Kutta, and Implicit Euler methods",
-      "Tested numerical methods with GoogleTest",
+      "Implemented Explicit Euler, RK2, RK4, and Implicit Euler methods",
+      "Used Eigen for vector and matrix-based state storage",
+      "Validated solver behavior with GoogleTest-based numerical tests",
     ],
     tags: ["C++", "Eigen", "GoogleTest", "Numerical Methods"],
     href: "https://github.com/gaurav44/ODE_Solver/tree/sprint_3",
-    selected: true,
   },
   {
     title: "COVID-19 Data Visualization GUI Application",

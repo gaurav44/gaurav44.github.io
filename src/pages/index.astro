@@ -8,6 +8,7 @@ import Footer from "@/components/Footer.astro";
 import Socials from "@/components/Socials.astro";
 import Card from "@/components/Card.astro";
 import LinkButton from "@/components/LinkButton.astro";
+import SkillChip from "@/components/SkillChip.astro";
 import { softwareExperience } from "@/data/experience";
 import { selectedWork } from "@/data/projects";
 import { getSortedPosts } from "@/utils/getSortedPosts";
@@ -69,7 +70,7 @@ const experienceSnapshot = softwareExperience.slice(0, 2);
       </div>
 
       <div class="mt-6 flex flex-wrap gap-2">
-        {focusAreas.map(area => <span class="tag-pill">{area}</span>)}
+        {focusAreas.map(area => <SkillChip label={area} />)}
       </div>
 
       {
@@ -121,7 +122,7 @@ const experienceSnapshot = softwareExperience.slice(0, 2);
               <p class="text-muted-foreground mt-3">{experience.summary}</p>
               <div class="mt-3 flex flex-wrap gap-2">
                 {experience.tags.slice(0, 4).map(tag => (
-                  <span class="tag-pill">#{tag}</span>
+                  <SkillChip label={tag} />
                 ))}
               </div>
             </li>
@@ -167,7 +168,7 @@ const experienceSnapshot = softwareExperience.slice(0, 2);
 
               <div class="mt-2 flex flex-wrap gap-2">
                 {work.tags.map(tag => (
-                  <span class="tag-pill">#{tag}</span>
+                  <SkillChip label={tag} />
                 ))}
               </div>
             </li>
