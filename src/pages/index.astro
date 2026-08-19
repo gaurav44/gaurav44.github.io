@@ -32,6 +32,19 @@ const focusAreas = [
   "Scientific software",
 ];
 
+const contactDetails = [
+  {
+    label: "Email",
+    value: "gauravgokhale752@gmail.com",
+    href: "mailto:gauravgokhale752@gmail.com",
+  },
+  {
+    label: "Phone",
+    value: "+49-15750995132",
+    href: "tel:+4915750995132",
+  },
+];
+
 const experienceSnapshot = softwareExperience.slice(0, 2);
 ---
 
@@ -53,6 +66,20 @@ const experienceSnapshot = softwareExperience.slice(0, 2);
       >
         Gaurav Gokhale
       </h1>
+
+      <address class="mb-4 flex flex-wrap gap-x-5 gap-y-2 not-italic">
+        {
+          contactDetails.map(contact => (
+            <a
+              href={contact.href}
+              class="group text-muted-foreground hover:text-accent inline-flex items-center gap-2 text-sm underline decoration-dashed underline-offset-4"
+            >
+              <span class="text-accent font-semibold">{contact.label}</span>
+              <span>{contact.value}</span>
+            </a>
+          ))
+        }
+      </address>
 
       <p class="text-muted-foreground max-w-3xl text-lg leading-8">
         I build performance-sensitive C++ software for simulation and scientific
